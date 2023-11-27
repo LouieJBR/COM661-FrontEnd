@@ -1,0 +1,18 @@
+<h1>
+  Thart Arís
+</h1>
+
+<h2>
+  There are {{business_list.length}} businesses in the directory
+</h2>
+
+<h3>
+  The first business is {{business_list[0].name}}
+</h3>
+
+<div *ngFor= " let business of business_list">
+  <p> Name: {{business.name}} <br>
+      City: {{business.city}}  <br>
+      Reviews: {{business.review_count}}
+  </p>
+</div>
