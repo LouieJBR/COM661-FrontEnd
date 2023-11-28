@@ -8,6 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {WebService} from "./web.service";
 import { RouterModule} from "@angular/router";
 import { HomeComponent} from './home/home.component';
+import {ProductComponent} from "./products/singleProduct/product.component";
 
 var routes: any = [
   {
@@ -17,6 +18,10 @@ var routes: any = [
   {
     path: 'products',
     component: ProductsComponent
+  },
+  {
+    path: 'products/:id',
+    component: ProductComponent
   }
 ];
 
@@ -24,7 +29,8 @@ var routes: any = [
   declarations: [
     AppComponent,
     ProductsComponent,
-    HomeComponent
+    HomeComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
