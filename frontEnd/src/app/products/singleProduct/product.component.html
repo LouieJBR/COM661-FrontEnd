@@ -42,3 +42,43 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div style = "width: 50rem; margin: auto; ">
+        <h2>Please review this product</h2>
+        <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="username">Name</label>
+            <input type="text" id="username" name="username"
+                   class="form-control"
+                   formControlName="username">
+          </div>
+          <div class="form-group">
+            <label for="comment">Please leave your review below
+            </label>
+            <textarea id="comment" rows="3" name="comment"
+                      class="form-control"
+                      formControlName="comment"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="stars">Please provide a rating
+              (5 = best)</label>
+            <select id="stars" name="stars"
+                    class="form-control"
+                    formControlName="stars">
+              <option value="1">1 star</option>
+              <option value="2">2 stars</option>
+              <option value="3">3 stars</option>
+              <option value="4">4 stars</option>
+              <option value="5">5 stars</option>
+            </select>
+          </div>
+          <button type="submit"
+                  class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
