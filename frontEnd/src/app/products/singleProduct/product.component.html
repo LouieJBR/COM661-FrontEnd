@@ -3,32 +3,40 @@
     <div class="col-sm-12">
       <div *ngFor = "let product of product_list | async">
         <div class="card text-white bg-primary mb-3"
-        style="width: 50rem; margin: auto">
+             style = "width: 50rem; margin: auto; cursor: pointer" [routerLink]="['/products', product._id]">
           <div class = "card-header">
             {{product.name}}
           </div>
           <div class="card-body">
             {{product.description}}
           </div>
-          <div class="card-body">
+          <div class="card-footer">
            Price: £{{product.price}}
-          </div>
-          <div class="card-body">
+            <br>
            Size: {{product.size}}
-          </div>
-          <div class="card-body">
-           Type: {{product.type}}
-          </div>
-          <div class="card-footer">
-            <span style="font-weight: bold">Reviews:</span>
-          </div>
-          <div class="card-footer">
-            <span style="font-weight: bold">{{product.reviews[0].username}}</span>
             <br>
-            {{product.reviews[0].comment}}
-            <br>
-            <span style="font-weight: bold">Rating:</span> {{product.reviews[0].stars}}/5
+            Type: {{product.type}}
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card bg-light mb-3"
+           style = "width: 50rem; margin:auto"
+           *ngFor = "let review of reviews | async">
+        <div class="card-header">
+          Review by <span style="font-weight: bold">{{ review.username }}</span>
+        </div>
+        <div class="card-body">
+          {{ review.comment }}
+        </div>
+        <div class="card-footer">
+          {{ review.stars }} stars
         </div>
       </div>
     </div>
