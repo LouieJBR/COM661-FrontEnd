@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div *ngFor = "let product of product_list | async">
+        <div class="card text-white bg-primary mb-3"
+             style = "width: 50rem; margin: auto; cursor: pointer" [routerLink]="['/products', product._id]">
+        <!--        style="width: 50rem; margin: auto">-->
+          <div class = "card-header">
+            {{product.name}}
+          </div>
+          <div class="card-body">
+            {{product.description}}
+          </div>
+          <div class="card-body">
+           Price: £{{product.price}}
+          </div>
+          <div class="card-body">
+           Size: {{product.size}}
+          </div>
+          <div class="card-body">
+           Type: {{product.type}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class ="col-sm-6">
+      <button class="btn btn-primary"
+              (click)="previousPage()">Previous</button>
+    </div>
+    <div class = "col-sm-6 text-end">
+      <button class="btn btn-primary"
+              (click)="nextPage()">Next</button>
+    </div>
+  </div>
+</div>
