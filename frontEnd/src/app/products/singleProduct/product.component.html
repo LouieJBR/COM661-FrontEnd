@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div *ngFor = "let product of product_list | async">
+        <div class="card text-white bg-primary mb-3"
+        style="width: 50rem; margin: auto">
+          <div class = "card-header">
+            {{product.name}}
+          </div>
+          <div class="card-body">
+            {{product.description}}
+          </div>
+          <div class="card-body">
+           Price: £{{product.price}}
+          </div>
+          <div class="card-body">
+           Size: {{product.size}}
+          </div>
+          <div class="card-body">
+           Type: {{product.type}}
+          </div>
+<!--          <div class="card-footer">-->
+<!--            <span style="font-weight: bold">Reviews:</span>-->
+<!--          </div>-->
+<!--          <div class="card-footer">-->
+<!--            <span style="font-weight: bold">{{product.reviews[0].username}}</span>-->
+<!--            <br>-->
+<!--            {{product.reviews[0].comment}}-->
+<!--            <br>-->
+<!--            <span style="font-weight: bold">Rating:</span> {{product.reviews[0].stars}}/5-->
+<!--          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
