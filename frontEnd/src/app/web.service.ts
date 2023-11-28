@@ -11,5 +11,11 @@ export class WebService {
   getProductById(id:any) {
     return this.http.get('http://localhost:5000/api/v1.0/products/' + id);
   }
+
+  getReviews(id:any){
+    return this.http.get(
+      'http://localhost:5000/api/v1.0/products/' +
+      id + '/reviews')
+  }
   }
 
