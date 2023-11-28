@@ -3,7 +3,7 @@ import {WebService} from "../../web.service";
 
 @Component({
   selector: 'products',
-  templateUrl: './products.component.html',
+  templateUrl: 'products.component.html',
   styleUrls: ['products.component.css']
 })
 export class ProductsComponent{
