@@ -28,7 +28,6 @@ export class ProductComponent {
   }
 
   onSubmit(){
-    console.log(this.reviewForm.value)
     this.webService.postReview(this.reviewForm.value).subscribe((response: any) => {
       this.reviewForm.reset();
       this.reviews = this.webService.getReviews(
