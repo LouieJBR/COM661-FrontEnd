@@ -1,48 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {AuthService} from "@auth0/auth0-angular";
 import {WebService} from "../../web.service";
-//
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: './home.component.html',
-//   styleUrls: ['./home.component.css']
-// })
-// export class HomeComponent implements OnInit {
-//   constructor(public authService: AuthService, public webService: WebService) {}
-//
-//   products: any = [];
-//
-//   ngOnInit() {
-//     this.webService.getAllProducts(1).subscribe((data: any) => {
-//       this.products = data;
-//       this.createCardGrid(); // Call function to create card grid after data retrieval
-//     });
-//   }
-//
-//   createCard(name: string, price: string, type: string, size: string) {
-//     const card = document.createElement('div');
-//     card.classList.add('card', 'm-3');
-//     card.innerHTML = `
-//       <div class="card-body">
-//         <h5 class="card-title">${name}</h5>
-//         <p class="card-text">Price: ${price}</p>
-//         <p class="card-text">Type: ${type}</p>
-//         <p class="card-text">Size: ${size}</p>
-//       </div>
-//     `;
-//     return card;
-//   }
-//
-//   createCardGrid() {
-//     const container = document.getElementById('cardContainer');
-//     this.products.forEach((product: any) => {
-//       const { name, price, type, size } = product;
-//       const cardElement = this.createCard(name, price, type, size);
-//       container?.appendChild(cardElement);
-//     });
-//   }
-// }
-
+import {RecentlyViewedService} from "../../services/RecentlyViewedService"
 
 @Component({
   selector: 'app-home',
@@ -50,13 +9,15 @@ import {WebService} from "../../web.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(public authService: AuthService, public webService: WebService) {}
+  constructor(public authService: AuthService, public webService: WebService, public recentlyViewedService: RecentlyViewedService) {}
 
   products: any = [];
+  recentlyViewedProducts: any[] = [];
 
   ngOnInit() {
     this.webService.getAllProducts().subscribe((data: any) => {
       this.products = data;
+      this.recentlyViewedProducts = this.recentlyViewedService.getRecentlyViewed()
       this.createCardGrid(); // Call function to create card grid after data retrieval
     });
   }
@@ -75,9 +36,11 @@ export class HomeComponent implements OnInit {
       </div>
     `;
     card.addEventListener('click', () => {
-      // Redirect to the URL associated with the product when the card is clicked
+      this.recentlyViewedService.addToRecentlyViewed({ name, price, type, size, id });
+      this.recentlyViewedProducts = this.recentlyViewedService.getRecentlyViewed(); // Update recently viewed products
       window.location.href = "/products/" + id;
-    });
+    });      // Redirect to the URL associated with the product when the card is clicked
+
     col.appendChild(card);
     return col;
   }
@@ -89,6 +52,10 @@ export class HomeComponent implements OnInit {
       const colElement = this.createCard(name, price, type, size, _id);
       container?.appendChild(colElement);
     });
+  }
+
+  redirectToProduct(productId: string) {
+    window.location.href = `/products/${productId}`;
   }
 }
 
