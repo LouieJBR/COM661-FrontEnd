@@ -10,17 +10,23 @@ export class ProductsComponent{
   constructor(public webService: WebService ) {}
 
   products: any = [];
+  page: number = 1;
 
 
-  ngOnInit(){
-    if (sessionStorage['page']){
+
+  ngOnInit() {
+    if (sessionStorage['page']) {
       this.page = Number(sessionStorage['page']);
     }
+    this.fetchProducts();
+  }
 
+  fetchProducts() {
     this.webService.getAllProductsPagination(this.page).subscribe((data: any) => {
       this.products = data;
       this.createCardGrid(); // Call function to create card grid after data retrieval
-    });  }
+    });
+  }
 
   createCard(name: string, price: string, type: string, size: string, id:string) {
     const col = document.createElement('div');
@@ -44,7 +50,8 @@ export class ProductsComponent{
   }
 
   createCardGrid() {
-    let container = document.getElementById('cardContainer');
+    const container = document.getElementById('cardContainer');
+    container!.innerHTML = ''; // Clear previous cards before adding new ones
     this.products.forEach((product: any) => {
       const { name, price, type, size, _id } = product;
       const colElement = this.createCard(name, price, type, size, _id);
@@ -52,21 +59,18 @@ export class ProductsComponent{
     });
   }
 
-  previousPage(){
+
+  previousPage() {
     if (this.page > 1) {
-      this.page = this.page -1;
+      this.page--;
       sessionStorage['page'] = this.page;
-      this.products = this.products =
-        this.webService.getAllProductsPagination(this.page)
+      this.fetchProducts();
     }
   }
 
-  nextPage(){
-    this.page = this.page  +1;
+  nextPage() {
+    this.page++;
     sessionStorage['page'] = this.page;
-    this.products = this.products =
-      this.webService.getAllProductsPagination(this.page)
-
+    this.fetchProducts();
   }
-  page: number = 1;
 }
