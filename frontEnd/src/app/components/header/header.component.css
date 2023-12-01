@@ -8,5 +8,21 @@
   width: 100%;
   z-index: 1000;
   margin-bottom: 100px;
+  background-color: #febe7e;
 }
 
+.first-color {
+  background: #57385c;
+}
+
+.second-color {
+  background: #a75265;
+}
+
+.third-color {
+  background: #ec7263;
+}
+
+.fourth-color {
+  background: #febe7e;
+}
