@@ -1,1 +1,12 @@
+.icon-text-spacing {
+  margin-left: 5px; /* Adjust this value to increase or decrease the spacing */
+}
+
+.header {
+  height: 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  margin-bottom: 100px;
+}
 

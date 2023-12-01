@@ -13,7 +13,7 @@ export class ProductsComponent{
     if (sessionStorage['page']){
       this.page = Number(sessionStorage['page']);
     }
-    this.product_list = this.webService.getAllProducts(this.page)
+    this.product_list = this.webService.getAllProductsPagination(this.page)
   }
 
   previousPage(){
@@ -21,7 +21,7 @@ export class ProductsComponent{
       this.page = this.page -1;
       sessionStorage['page'] = this.page;
       this.product_list = this.product_list =
-        this.webService.getAllProducts(this.page)
+        this.webService.getAllProductsPagination(this.page)
     }
   }
 
@@ -29,7 +29,7 @@ export class ProductsComponent{
     this.page = this.page  +1;
     sessionStorage['page'] = this.page;
     this.product_list = this.product_list =
-        this.webService.getAllProducts(this.page)
+        this.webService.getAllProductsPagination(this.page)
   }
   product_list: any = [];
   page: number = 1;

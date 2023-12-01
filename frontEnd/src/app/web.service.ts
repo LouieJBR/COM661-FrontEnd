@@ -6,10 +6,13 @@ export class WebService {
   constructor(private http: HttpClient) {}
 
   private productID: any;
-  getAllProducts(page: number) {
+  getAllProductsPagination(page: number) {
     return this.http.get('http://localhost:5000/api/v1.0/products?pn=' + page);
     }
 
+  getAllProducts() {
+    return this.http.get('http://localhost:5000/api/v1.0/products');
+  }
   getProductById(id:any) {
     this.productID = id
     return this.http.get('http://localhost:5000/api/v1.0/products/' + id);
