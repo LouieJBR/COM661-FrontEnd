@@ -18,6 +18,11 @@ export class WebService {
     return this.http.get('http://localhost:5000/api/v1.0/products/' + id);
   }
 
+  getProductByType(productType:any) {
+    console.log(productType)
+    return this.http.get('http://localhost:5000/api/v1.0/products/type/'+ productType);
+  }
+
   getReviews(id:any){
     return this.http.get(
       'http://localhost:5000/api/v1.0/products/' +

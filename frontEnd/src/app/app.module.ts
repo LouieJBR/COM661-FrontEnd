@@ -14,6 +14,7 @@ import { AuthModule } from "@auth0/auth0-angular";
 import {HeaderComponent} from "./components/header/header.component";
 import {HeroComponent} from "./components/hero/hero.component";
 import { FooterComponent } from './components/footer/footer.component';
+import { ProductByTypeComponent } from './components/products/productByType/productByType.component';
 
 
 var routes: any = [
@@ -28,7 +29,10 @@ var routes: any = [
   {
     path: 'products/:id',
     component: ProductComponent
-  }
+  },{
+    path: 'products/type/:productType',
+    component: ProductByTypeComponent
+  },
 ];
 
 @NgModule({
@@ -39,7 +43,8 @@ var routes: any = [
     ProductComponent,
     HeroComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProductByTypeComponent
   ],
   imports: [
     BrowserModule,
