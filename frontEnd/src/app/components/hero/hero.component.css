@@ -1,0 +1,81 @@
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 120px 0;
+}
+
+.hero__categories {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__categories__all {
+  font-size: 24px;
+  color: #222;
+  cursor: pointer;
+}
+
+.hero__categories__all i {
+  margin-right: 8px;
+}
+
+.hero__categories ul {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  background-color: #fff;
+  padding: 16px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero__categories li {
+  margin-bottom: 12px;
+}
+
+.hero__categories li a {
+  font-size: 18px;
+  color: #222;
+}
+
+.hero__item {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__text {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 48px 68px;
+  color: #fff;
+  text-align: left;
+}
+
+.hero__text span {
+  font-size: 16px;
+  color: #e67e22;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero__text h2 {
+  font-size: 48px;
+  margin-bottom: 24px;
+}
+
+.hero__text p {
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.hero__text a {
+  display: inline-block;
+  font-size: 18px;
+  color: #222;
+  text-transform: uppercase;
+  background-color: #e67e22;
+  padding: 16px 24px;
+  border-radius: 40px;
+}
