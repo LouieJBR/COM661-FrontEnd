@@ -29,21 +29,18 @@ export class WebService {
       id + '/reviews')
   }
 
-  login(loginData: any){
-    // Encode username and password for Basic Auth
-    const credentials = btoa(`${loginData.username}:${loginData.password}`);
+  login(data: any, options: any): void {
 
-    // Set headers for Basic Auth
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ${loginData}`
-    });
-
-    return this.http.post(
-      'http://localhost:5000/api/v1.0/login',
-      {
-        headers: headers
-      }    )
+    this.http.post<any>('http://localhost:5000/api/v1.0/login', data, options)
+      .subscribe(
+        (response) => {
+          console.log("logged in")
+          // Handle successful login (e.g., redirect to another page)
+        },
+        (error) => {
+          console.log("Incorrect details")
+        }
+      );
   }
 
   postReview(review: any){
