@@ -28,8 +28,10 @@ export class ProductByTypeComponent {
     console.log(this.products)
   }
 
+  typeToSearch = this.convertToTitleCase(this.filterProductType);
+
   fetchProducts() {
-    this.webService.getProductByType(this.convertToTitleCase(this.filterProductType)).subscribe((data: any) => {
+    this.webService.getProductByType(this.filterProductType).subscribe((data: any) => {
       this.products = data;
       this.createCardGrid(); // Call function to create card grid after data retrieval
     });
