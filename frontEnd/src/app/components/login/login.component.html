@@ -6,53 +6,40 @@
           <div class="row g-0">
             <div class="col-md-6 col-lg-5 d-none d-md-block">
               <img src="./assets/images/profileIcon.jpg"
-                   alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 100%;" />
+                   alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 100%;"/>
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black" style="height: 100%;">
 
-
                 <form (ngSubmit)="onLogin()">
-                  <div>
+
+                  <h4 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;"><B>Thart Arís</B></h4>
+
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                  <div class="form-outline mb-4">
                     <label for="username">Username:</label>
                     <input type="text" id="username" [(ngModel)]="username" name="username" required>
                   </div>
-                  <div>
+
+                  <div class="form-outline mb-4">
                     <label for="password">Password:</label>
                     <input type="password" id="password" [(ngModel)]="password" name="password" required>
                   </div>
-                  <button type="submit">Login</button>
+
+                  <div class="pt-1 mb-4">
+                    <button type="submit">Login</button>
+                  </div>
+
+                  <a class="small text-muted" href="#!">Forgot password?</a>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!"
+                                                                                            style="color: #393f81;">Register
+                    here</a></p>
+                  <a href="#!" class="small text-muted">Terms of use.</a>
+                  <a href="#!" class="small text-muted">Privacy policy</a>
                 </form>
                 <p *ngIf="errorMessage">{{ errorMessage }}</p>
-
-
-                <!--                <form>-->
-<!--                  <h4 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;"><B>Thart Arís</B></h4>-->
-
-
-<!--                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>-->
-
-<!--                  <div class="form-outline mb-4">-->
-<!--                    <input type="text" id="username" class="form-control form-control-lg" />-->
-<!--                    <label class="form-label" for="username">Email address</label>-->
-<!--                  </div>-->
-
-<!--                  <div class="form-outline mb-4">-->
-<!--                    <input type="password" id="password" class="form-control form-control-lg"/>-->
-<!--                    <label class="form-label" for="password">Password</label>-->
-<!--                  </div>-->
-
-<!--                  <div class="pt-1 mb-4">-->
-<!--                    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Login</button>-->
-<!--                  </div>-->
-
-<!--                  <a class="small text-muted" href="#!">Forgot password?</a>-->
-<!--                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!"-->
-<!--                                                                                            style="color: #393f81;">Register here</a></p>-->
-<!--                  <a href="#!" class="small text-muted">Terms of use.</a>-->
-<!--                  <a href="#!" class="small text-muted">Privacy policy</a>-->
-<!--                </form>-->
-
               </div>
             </div>
           </div>
