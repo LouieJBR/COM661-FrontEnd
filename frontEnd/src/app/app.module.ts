@@ -12,8 +12,14 @@ import { HomeComponent} from './components/home/home.component';
 import {ProductComponent} from "./components/products/product/product.component";
 import { AuthModule } from "@auth0/auth0-angular";
 import {HeaderComponent} from "./components/header/header.component";
-import {HeroComponent} from "./components/hero/hero.component";
 import { FooterComponent } from './components/footer/footer.component';
+import { ProductByTypeComponent } from './components/products/productByType/productByType.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CartComponent } from './components/cart/cart.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { CustomOrdersComponent } from './components/custom-orders/custom-orders.component';
 
 
 var routes: any = [
@@ -28,6 +34,12 @@ var routes: any = [
   {
     path: 'products/:id',
     component: ProductComponent
+  },{
+    path: 'products/type/:productType',
+    component: ProductByTypeComponent
+  },{
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
@@ -37,9 +49,15 @@ var routes: any = [
     ProductsComponent,
     HomeComponent,
     ProductComponent,
-    HeroComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProductByTypeComponent,
+    BannerComponent,
+    LoginComponent,
+    RegisterComponent,
+    CartComponent,
+    WishlistComponent,
+    CustomOrdersComponent
   ],
   imports: [
     BrowserModule,
