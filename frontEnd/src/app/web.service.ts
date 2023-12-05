@@ -40,23 +40,6 @@ export class WebService {
       id + '/reviews')
   }
 
-  // login(data: any, options: any) {
-  //
-  //   return this.http.post<any>('http://localhost:5000/api/v1.0/login', data, options)
-  //     .pipe(
-  //       filter((event: any) => event instanceof HttpResponse), // Filter only HttpResponse events
-  //       tap((response: HttpResponse<any>) => {
-  //         console.log(response.headers)
-  //         console.log(response)
-  //         const token = response.body.get('token');
-  //         console.log(token);
-  //
-  //         // Redirect to '/' upon successful login
-  //         this.router.navigate(['/']);
-  //       })
-  //     );
-  // }
-
   login(data: any, options: any) {
     return this.http.post<any>('http://localhost:5000/api/v1.0/login', data, options).pipe(
       catchError(error => {
