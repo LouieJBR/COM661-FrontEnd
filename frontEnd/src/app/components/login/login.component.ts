@@ -1,36 +1,33 @@
 import { Component } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {WebService} from "../../web.service";
+import {Router} from "@angular/router";
+import {catchError, filter, tap, throwError} from "rxjs";
 
 @Component({
-  selector: 'login',
-  templateUrl: 'login.component.html',
-  styleUrl: 'login.component.css'
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  errorMessage: string = '';
 
-  constructor(private webService: WebService) { }
+  constructor(private webService: WebService, private router: Router) {}
 
-  onSubmit(): void {
-    // Prepare data for login API call
-    const loginData = {
-      username: this.username,
-      password: this.password
-    };
+  onLogin() {
+    const auth = btoa(`${this.username}:${this.password}`);
+    const headers = new HttpHeaders({
+      'Authorization': `Basic ${auth}`,
+      'Content-Type': 'application/json' // Assuming the content type is JSON
+    });
 
-    // Make API call to login endpoint
-    this.webService.login(loginData)
-      .subscribe(
-        (response) => {
-          console.log('Signed In', response);
-          // Handle successful login here, maybe route to a new page or store login status
-        },
-        (error) => {
-          console.error('Login failed', error);
-          // Handle login failure, show error message to the user, etc.
-        }
-      );
+    const options = {headers};
+
+    const data = {username: this.username, password: this.password};
+
+
+    this.webService.login(data, options).subscribe()
   }
 }
