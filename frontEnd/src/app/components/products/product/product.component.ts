@@ -1,7 +1,9 @@
 import {Component} from "@angular/core";
 import {WebService} from "../../../web.service";
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
+import {AuthService} from "../../../services/AuthService";
+import {style} from "@angular/animations";
 
 @Component({
   selector: 'product',
@@ -14,32 +16,48 @@ export class ProductComponent {
   reviewForm: any;
   constructor(private webService: WebService,
               private route: ActivatedRoute,
-              private formBuilder: FormBuilder) {}
+              private formBuilder: FormBuilder,
+              private authService: AuthService) {}
 
   ngOnInit(){
-    this.reviewForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      comment: ['', Validators.required],
-      stars: 5
-    })
+
+    this.setUpReviewForm()
 
     this.product_list = this.webService.getProductById(this.route.snapshot.params['id'])
     this.reviews = this.webService.getReviews(this.route.snapshot.params['id'])
   }
 
+  setUpReviewForm(){
+    if(this.isLoggedIn()){
+      this.reviewForm = this.formBuilder.group({
+        username: [this.getUsername(), Validators.required],
+        comment: ['', Validators.required],
+        stars: 5
+      })
+    }else{
+      this.reviewForm = this.formBuilder.group({
+        username: ['', Validators.required],
+        comment: ['', Validators.required],
+        stars: 5
+      })
+    }
+  }
   onSubmit(){
     this.webService.postReview(this.reviewForm.value).subscribe((response: any) => {
       this.reviewForm.reset();
       this.reviews = this.webService.getReviews(
         this.route.snapshot.params['id']);
+      this.setUpReviewForm()
     });
   }
 
   isInvalidUsername() {
-    const usernameChecks =  this.reviewForm.controls.username.invalid &&
-      this.reviewForm.controls.username.touched;
-
-    return usernameChecks
+    if(this.isLoggedIn()){
+      return false
+    }else{
+        return this.reviewForm.controls.username.invalid &&
+        this.reviewForm.controls.username.touched;
+    }
   }
 
   isInvalidComment() {
@@ -50,11 +68,24 @@ export class ProductComponent {
   }
 
   isUntouched() {
-    return this.reviewForm.controls.username.pristine ||
-      this.reviewForm.controls.comment.pristine;
+    if(this.isLoggedIn()){
+        return this.reviewForm.controls.comment.pristine;
+    }else{
+      return this.reviewForm.controls.username.pristine ||
+        this.reviewForm.controls.comment.pristine;
+    }
   }
   isIncomplete() {
     return this.isInvalidUsername() || this.isInvalidComment() ||
     this.isUntouched();
   }
+
+  isLoggedIn() {
+    return this.authService.isLoggedInUser();
+  }
+
+  getUsername() {
+    return this.authService.getUsername();
+  }
+
 }

@@ -14,7 +14,25 @@
         <!-- Center elements -->
         <div class="order-lg-last col-lg-5 col-sm-8 col-8">
           <div class="d-flex float-end">
-            <a href="/login" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <img src="/assets/icons/person-fill.svg" alt="profile"> <p class="d-none d-md-block mb-0 icon-text-spacing">Sign in</p></a>
+            <ng-container *ngIf="isLoggedIn()">
+              <a href="/" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                <img src="/assets/icons/person-fill.svg" alt="profile">
+                <p class="d-none d-md-block mb-0 icon-text-spacing"> Account: {{ getUsername() }}</p>
+              </a>
+
+              <a href="/" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                <img src="/assets/icons/person-fill.svg" alt="profile">
+                <p class="d-none d-md-block mb-0 icon-text-spacing"(click)="logOut()">Sign Out</p>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="!isLoggedIn()">
+              <!-- Sign in button when not logged in -->
+              <a href="/login" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                <img src="/assets/icons/person-fill.svg" alt="profile">
+                <p class="d-none d-md-block mb-0 icon-text-spacing">Sign in</p>
+              </a>
+            </ng-container>
+<!--            <a href="/login" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <img src="/assets/icons/person-fill.svg" alt="profile"> <p class="d-none d-md-block mb-0 icon-text-spacing">{{getUsername()}}</p></a>-->
 
             <!--            <a class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <img src="/assets/icons/person-fill.svg" alt="profile"> <p class="d-none d-md-block mb-0 icon-text-spacing">Sign in</p> </a>-->
             <a class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <img src="/assets/icons/bookmark-heart-fill.svg" alt="wishlist"><p class="d-none d-md-block mb-0 icon-text-spacing">Wishlist</p> </a>

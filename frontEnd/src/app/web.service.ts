@@ -3,18 +3,11 @@ import { Injectable } from '@angular/core'
 import { CookieService } from 'ngx-cookie-service';
 import {catchError, filter, map, Observable, tap, throwError} from "rxjs";
 import {Router} from "@angular/router";
+import {AuthService} from "./services/AuthService";
 
 @Injectable()
 export class WebService {
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {}
-
-  private getHeaders() {
-    const token = this.cookieService.get('access_token');
-    const headers = new HttpHeaders({
-      'x-access-token': token,
-    });
-    return { headers };
-  }
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private authService: AuthService) {}
 
   private productID: any;
   getAllProductsPagination(page: number) {
@@ -42,22 +35,33 @@ export class WebService {
 
   login(data: any, options: any) {
     return this.http.post<any>('http://localhost:5000/api/v1.0/login', data, options).pipe(
-      catchError(error => {
+      catchError((error: any) => {
         console.error('Error occurred:', error);
-        return throwError(error);
+        let errorMessage = 'Login failed. Please check your credentials.'; // Default error message
+        if (error && error.error && error.error.message) {
+          errorMessage = error.error.message; // Use the error message from the API response if available
+        }
+        return throwError(errorMessage); // Pass the error message down the observable chain
       }),
       tap((response: any) => {
         console.log('Response received:', response); // Log the full response for debugging
         if (response && response.token) {
           console.log('Token:', response.token); // Log the token if available
+          this.authService.setAuthToken(response.token)
           // Assuming you have a function to save the token
           // Save the token here
           this.router.navigate(['/']); // Manually navigate to the home page
         } else {
           console.log('Invalid response');
+
         }
       })
     );
+  }
+
+  logout(){
+    this.authService.logout()
+    return this.http.get('http://localhost:5000/api/v1.0/logout');
   }
 
 

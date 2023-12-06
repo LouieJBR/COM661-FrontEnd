@@ -18,11 +18,13 @@
 
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
+                  <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="username">Username:</label>
                     <input class="form-control form-control-lg" type="text" id="username" [(ngModel)]="username" name="username" required>
                   </div>
 
+                  <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="password">Password:</label>
                     <input class="form-control form-control-lg" type="password" id="password" [(ngModel)]="password" name="password" required>
