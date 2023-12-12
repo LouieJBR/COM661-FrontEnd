@@ -59,6 +59,34 @@ export class WebService {
     );
   }
 
+  signUp(data: any, options: any) {
+    return this.http.post<any>('http://localhost:5000/api/v1.0/signup', data, options).pipe(
+      catchError((error: any) => {
+        console.error('Error occurred:', error);
+        let errorMessage = 'Signup failed. Please try again.'; // Default error message
+        if (error && error.error && error.error.message) {
+          errorMessage = error.error.message; // Use the error message from the API response if available
+        }
+        return throwError(errorMessage); // Pass the error message down the observable chain
+      }),
+      tap((response: any) => {
+        console.log('Signup response received:', response); // Log the full response for debugging
+        // Handle the response as needed upon successful signup
+        // For instance, you might want to redirect to another page after successful signup
+        // Modify this section based on your application's logic
+        if (response) {
+          console.log('Signup successful');
+          // For example, navigate to the home page
+          this.router.navigate(['/login']); // Navigate to the home page after signup
+        } else {
+          console.log('Invalid signup response');
+          // Handle invalid signup response here
+        }
+      })
+    );
+  }
+
+
   logout(){
     this.authService.logout()
     return this.http.get('http://localhost:5000/api/v1.0/logout');
