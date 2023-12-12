@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {HttpHeaders} from "@angular/common/http";
 import {AuthService} from "../../services/AuthService";
 import {WebService} from "../../web.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent {
   email: string = '';
   errorMessage: string = '';
 
-  constructor(private webService: WebService) {}
+  constructor(private webService: WebService, private router: Router) {
+  }
 
   onSignup() {
     const data = {
@@ -28,8 +30,15 @@ export class RegisterComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json' // Assuming the content type is JSON
     });
-    const options = { headers };
+    const options = {headers};
 
-    this.webService.signUp(data, options).subscribe()
+    this.webService.signUp(data, options).subscribe(
+      () => {
+      },
+      (error: any) => {
+        console.error('Error occurred:', error);
+        this.errorMessage = error; // Display the error message from the API response
+      }
+    );
   }
 }
