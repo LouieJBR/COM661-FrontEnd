@@ -40,6 +40,9 @@ var routes: any = [
   },{
     path: 'login',
     component: LoginComponent
+  },{
+    path: 'register',
+    component: RegisterComponent
   }
 ];
 
