@@ -18,10 +18,9 @@ import { BannerComponent } from './components/banner/banner.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
-// import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CustomOrdersComponent } from './components/custom-orders/custom-orders.component';
 import {WishlistComponent} from "./components/wishlist/wishlist.component";
-import { TESTWISHLISTComponent } from './components/testwishlist/testwishlist.component';
+import { AccountComponent } from './components/account/account.component';
 
 
 var routes: any = [
@@ -48,6 +47,9 @@ var routes: any = [
   },{
     path: 'wishlist',
     component: WishlistComponent
+  },{
+    path: 'account',
+    component: AccountComponent
   }
 ];
 
@@ -66,7 +68,7 @@ var routes: any = [
     CartComponent,
     WishlistComponent,
     CustomOrdersComponent,
-    TESTWISHLISTComponent
+    AccountComponent
   ],
   imports: [
     BrowserModule,
