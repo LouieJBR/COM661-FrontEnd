@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {WebService} from "../../web.service";
 import {Router} from "@angular/router";
 
@@ -10,7 +10,8 @@ import {Router} from "@angular/router";
 export class WishlistComponent {
   wishlistItems: any[] = []; // Assuming the structure matches the API response
 
-  constructor(private webService: WebService, private router: Router) { }
+  constructor(private webService: WebService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.getWishlist();

@@ -1,8 +1,8 @@
-import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/http';
-import { Injectable } from '@angular/core'
-import { CookieService } from 'ngx-cookie-service';
-import {catchError, filter, map, Observable, tap, throwError} from "rxjs";
-import {Router, withInMemoryScrolling} from "@angular/router";
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core'
+import {CookieService} from 'ngx-cookie-service';
+import {catchError, tap, throwError} from "rxjs";
+import {Router} from "@angular/router";
 import {AuthService} from "./services/AuthService";
 
 @Injectable()
@@ -105,7 +105,7 @@ export class WebService {
         console.log('Update account response received:', response); // Log the full response for debugging
         if (response) {
           console.log('Account update successful');
-          window.location.href="/account"
+          window.location.href = "/account"
         } else {
           console.log('Invalid account update response');
           // Handle invalid account update response here
@@ -155,7 +155,7 @@ export class WebService {
         (response: any) => {
           // Handle successful addition to wishlist response here
           console.log('Product added to wishlist:', response);
-          window.location.href='/wishlist'
+          window.location.href = '/wishlist'
         },
         (error: any) => {
           // Handle error response here
@@ -176,7 +176,7 @@ export class WebService {
         (response: any) => {
           // Handle successful addition to wishlist response here
           console.log('Product removed from wishlist:', response);
-          window.location.href='/wishlist'
+          window.location.href = '/wishlist'
         },
         (error: any) => {
           // Handle error response here
@@ -189,7 +189,7 @@ export class WebService {
     }
   }
 
-  getAllFromWishlist(){
+  getAllFromWishlist() {
     let username = sessionStorage.getItem(this.ACTIVE_USER_KEY)
     return this.http.get('http://localhost:5000/api/v1.0/wishlist/' + username)
   }

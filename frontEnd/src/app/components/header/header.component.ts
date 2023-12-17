@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "../../services/AuthService";
 import {WebService} from "../../web.service";
 
@@ -9,17 +9,18 @@ import {WebService} from "../../web.service";
 })
 export class HeaderComponent {
 
-  constructor(private authService: AuthService, private webService:WebService) {}
+  constructor(private authService: AuthService, private webService: WebService) {
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     return this.isLoggedIn()
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     return this.authService.isLoggedInUser()
   }
 
-  logOut(){
+  logOut() {
     return this.webService.logout()
   }
 

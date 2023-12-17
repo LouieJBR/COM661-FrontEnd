@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpHeaders} from "@angular/common/http";
-import {AuthService} from "../../services/AuthService";
 import {WebService} from "../../web.service";
 import {Router} from "@angular/router";
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {WebService} from "../../../web.service";
 import {ActivatedRoute} from "@angular/router";
 
@@ -8,9 +8,10 @@ import {ActivatedRoute} from "@angular/router";
   styleUrl: './productByType.component.css'
 })
 export class ProductByTypeComponent {
-  constructor(public webService: WebService ,
+  constructor(public webService: WebService,
               private route: ActivatedRoute,
-  ) {}
+  ) {
+  }
 
   products: any = [];
   page: number = 1;
@@ -37,7 +38,7 @@ export class ProductByTypeComponent {
     });
   }
 
-  createCard(name: string, price: string, type: string, size: string, id:string) {
+  createCard(name: string, price: string, type: string, size: string, id: string) {
     const col = document.createElement('div');
     col.classList.add('col-md-4'); // Adjust column size based on your design (e.g., col-md-4, col-lg-3)
     const card = document.createElement('div');
@@ -62,7 +63,7 @@ export class ProductByTypeComponent {
     const container = document.getElementById('cardContainer');
     container!.innerHTML = ''; // Clear previous cards before adding new ones
     this.products.forEach((product: any) => {
-      const { name, price, type, size, _id } = product;
+      const {name, price, type, size, _id} = product;
       const colElement = this.createCard(name, price, type, size, _id);
       container?.appendChild(colElement);
     });
