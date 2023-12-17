@@ -3,22 +3,26 @@
     <div class="card">
       <div class="card-body">
         <form (ngSubmit)="updateAccount()">
-          <h5 class="card-title text-center fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Update Account Information</h5>
+          <h5 class="card-title text-center fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Update Account
+            Information</h5>
 
           <!-- Display user details -->
           <div class="form-outline mb-4">
             <label class="form-label" for="name">Name: </label>
-            <input class="form-control form-control-lg" type="text" id="name" [(ngModel)]="account.new_name" name="name" required value="{{ account.name }}">
+            <input class="form-control form-control-lg" type="text" id="name" [(ngModel)]="account.new_name" name="name"
+                   required value="{{ account.name }}">
           </div>
 
           <div class="form-outline mb-4">
             <label class="form-label" for="username">Username: </label>
-            <input class="form-control form-control-lg" type="text" id="username" [(ngModel)]="account.new_username" name="username" required value="{{ account.username }}">
+            <input class="form-control form-control-lg" type="text" id="username" [(ngModel)]="account.new_username"
+                   name="username" required value="{{ account.username }}">
           </div>
 
           <div class="form-outline mb-4">
             <label class="form-label" for="email">Email: </label>
-            <input class="form-control form-control-lg" type="email" id="email" [(ngModel)]="account.new_email" name="email" required value="{{ account.email }}">
+            <input class="form-control form-control-lg" type="email" id="email" [(ngModel)]="account.new_email"
+                   name="email" required value="{{ account.email }}">
           </div>
 
           <div class="text-center">

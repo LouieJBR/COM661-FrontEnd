@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class AuthService {
   private username: string = ''; // Add a property to store the username
   private activeUser: string = ''
 
-  constructor() {}
+  constructor() {
+  }
 
   setAuthToken(token: string): void {
     sessionStorage.setItem(this.AUTH_TOKEN_KEY, token); // Store token in local storage

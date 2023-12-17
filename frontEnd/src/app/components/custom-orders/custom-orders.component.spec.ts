@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CustomOrdersComponent } from './custom-orders.component';
+import {CustomOrdersComponent} from './custom-orders.component';
 
 describe('CustomOrdersComponent', () => {
   let component: CustomOrdersComponent;
@@ -10,8 +10,8 @@ describe('CustomOrdersComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CustomOrdersComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(CustomOrdersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

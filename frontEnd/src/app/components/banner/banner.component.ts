@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {WebService} from "../../web.service";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-banner',

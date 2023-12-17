@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {WebService} from "../../web.service";
-import {Router} from "@angular/router";
 import {HttpHeaders} from "@angular/common/http";
 
 @Component({
@@ -20,7 +19,8 @@ export class AccountComponent {
 
   errorMessage: string = '';
 
-  constructor(private webService: WebService) {}
+  constructor(private webService: WebService) {
+  }
 
   ngOnInit() {
     this.getUserDetails(); // Call getUserDetails when the component initializes

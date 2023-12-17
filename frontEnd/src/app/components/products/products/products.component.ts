@@ -6,12 +6,12 @@ import {WebService} from "../../../web.service";
   templateUrl: 'products.component.html',
   styleUrls: ['products.component.css']
 })
-export class ProductsComponent{
-  constructor(public webService: WebService ) {}
+export class ProductsComponent {
+  constructor(public webService: WebService) {
+  }
 
   products: any = [];
   page: number = 1;
-
 
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class ProductsComponent{
     });
   }
 
-  createCard(name: string, price: string, type: string, size: string, id:string) {
+  createCard(name: string, price: string, type: string, size: string, id: string) {
     const col = document.createElement('div');
     col.classList.add('col-md-4'); // Adjust column size based on your design (e.g., col-md-4, col-lg-3)
     const card = document.createElement('div');
@@ -53,7 +53,7 @@ export class ProductsComponent{
     const container = document.getElementById('cardContainer');
     container!.innerHTML = ''; // Clear previous cards before adding new ones
     this.products.forEach((product: any) => {
-      const { name, price, type, size, _id } = product;
+      const {name, price, type, size, _id} = product;
       const colElement = this.createCard(name, price, type, size, _id);
       container?.appendChild(colElement);
     });

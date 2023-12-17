@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
 import {WebService} from "../../../web.service";
 import {ActivatedRoute} from "@angular/router";
-import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/AuthService";
-import {style} from "@angular/animations";
+import {CartService} from "../../../services/CartService";
 
 @Component({
   selector: 'product',
@@ -17,12 +17,15 @@ export class ProductComponent {
   wishlistItems: any[] = []; // Assuming the structure matches the API response
 
   activeProductId: any;
+
   constructor(private webService: WebService,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private cartService: CartService) {
+  }
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.setUpReviewForm();
     this.activeProductId = this.route.snapshot.params['id'];
@@ -33,14 +36,14 @@ export class ProductComponent {
     this.fetchWishlistItems();
   }
 
-  setUpReviewForm(){
-    if(this.isLoggedIn()){
+  setUpReviewForm() {
+    if (this.isLoggedIn()) {
       this.reviewForm = this.formBuilder.group({
         username: [this.getUsername(), Validators.required],
         comment: ['', Validators.required],
         stars: 5
       })
-    }else{
+    } else {
       this.reviewForm = this.formBuilder.group({
         username: ['', Validators.required],
         comment: ['', Validators.required],
@@ -48,7 +51,8 @@ export class ProductComponent {
       })
     }
   }
-  onSubmit(){
+
+  onSubmit() {
     this.webService.postReview(this.reviewForm.value).subscribe((response: any) => {
       this.reviewForm.reset();
       this.reviews = this.webService.getReviews(
@@ -59,32 +63,33 @@ export class ProductComponent {
 
 
   isInvalidUsername() {
-    if(this.isLoggedIn()){
+    if (this.isLoggedIn()) {
       return false
-    }else{
-        return this.reviewForm.controls.username.invalid &&
+    } else {
+      return this.reviewForm.controls.username.invalid &&
         this.reviewForm.controls.username.touched;
     }
   }
 
   isInvalidComment() {
-    const commentChecks=  this.reviewForm.controls.comment.invalid &&
+    const commentChecks = this.reviewForm.controls.comment.invalid &&
       this.reviewForm.controls.comment.touched;
 
     return commentChecks
   }
 
   isUntouched() {
-    if(this.isLoggedIn()){
-        return this.reviewForm.controls.comment.pristine;
-    }else{
+    if (this.isLoggedIn()) {
+      return this.reviewForm.controls.comment.pristine;
+    } else {
       return this.reviewForm.controls.username.pristine ||
         this.reviewForm.controls.comment.pristine;
     }
   }
+
   isIncomplete() {
     return this.isInvalidUsername() || this.isInvalidComment() ||
-    this.isUntouched();
+      this.isUntouched();
   }
 
   isLoggedIn() {
@@ -99,7 +104,7 @@ export class ProductComponent {
     return this.webService.addToWishlist(this.activeProductId)
   }
 
-  removeFromWishlist(){
+  removeFromWishlist() {
     return this.webService.removeFromWishlist(this.activeProductId)
   }
 
@@ -116,6 +121,11 @@ export class ProductComponent {
         console.error('Error fetching wishlist:', error);
       }
     );
+  }
+
+  addToCart(product: any) {
+    this.cartService.addToCart(product);
+    // You can optionally show a message or perform other actions upon adding to cart
   }
 
 }

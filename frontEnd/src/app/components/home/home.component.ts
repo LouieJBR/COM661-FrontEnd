@@ -9,7 +9,8 @@ import {RecentlyViewedService} from "../../services/RecentlyViewedService"
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(public authService: AuthService, public webService: WebService, public recentlyViewedService: RecentlyViewedService) {}
+  constructor(public authService: AuthService, public webService: WebService, public recentlyViewedService: RecentlyViewedService) {
+  }
 
   products: any = [];
   recentlyViewedProducts: any[] = [];
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  createCard(name: string, price: string, type: string, size: string, id:string) {
+  createCard(name: string, price: string, type: string, size: string, id: string) {
     const col = document.createElement('div');
     col.classList.add('col-md-4'); // Adjust column size based on your design (e.g., col-md-4, col-lg-3)
     const card = document.createElement('div');
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
       </div>
     `;
     card.addEventListener('click', () => {
-      this.recentlyViewedService.addToRecentlyViewed({ name, price, type, size, id });
+      this.recentlyViewedService.addToRecentlyViewed({name, price, type, size, id});
       this.recentlyViewedProducts = this.recentlyViewedService.getRecentlyViewed(); // Update recently viewed products
       window.location.href = "/products/" + id;
     });      // Redirect to the URL associated with the product when the card is clicked
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit {
   createCardGrid() {
     const container = document.getElementById('cardContainer');
     this.products.forEach((product: any) => {
-      const { name, price, type, size, _id } = product;
+      const {name, price, type, size, _id} = product;
       const colElement = this.createCard(name, price, type, size, _id);
       container?.appendChild(colElement);
     });
