@@ -91,6 +91,34 @@ export class WebService {
     );
   }
 
+  updateAccount(data: any, options: any) {
+    return this.http.put<any>('http://localhost:5000/api/v1.0/update-account', data, options).pipe(
+      catchError((error: any) => {
+        console.error('Error occurred:', error);
+        let errorMessage = 'Account update failed. Please try again.'; // Default error message
+        if (error && error.error && error.error.message) {
+          errorMessage = error.error.message; // Use the error message from the API response if available
+        }
+        return throwError(errorMessage); // Pass the error message down the observable chain
+      }),
+      tap((response: any) => {
+        console.log('Update account response received:', response); // Log the full response for debugging
+        if (response) {
+          console.log('Account update successful');
+          window.location.href="/account"
+        } else {
+          console.log('Invalid account update response');
+          // Handle invalid account update response here
+        }
+      })
+    );
+  }
+
+  getUserDetails() {
+    let username = sessionStorage.getItem(this.ACTIVE_USER_KEY)
+    return this.http.get('http://localhost:5000/api/v1.0/user-details/' + username!.toString());
+  }
+
 
   logout() {
     this.authService.logout()
