@@ -1,25 +1,24 @@
 <div class="product-component">
 
-  <div *ngIf="wishlistItems.length === 0">
-    <section>
-      <p>No items in wishlist.</p>
-    </section>
-  </div>
+<div *ngIf="wishlistItems.length === 0">
   <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4" *ngFor="let item of wishlistItems">
-          <div class="card m-3" (click)="redirectToProduct(item._id)">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.name }}</h5>
-              <p class="card-text">Price: {{ item.price }}</p>
-              <p class="card-text">Type: {{ item.type }}</p>
-            </div>
-          </div>
+    <p>No items in wishlist.</p>
+  </section>
+</div>
+<section>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let item of wishlistItems">
+      <div class="card m-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">Price: {{ item.price }}</p>
+          <p class="card-text">Type: {{ item.type }}</p>
+          <p class="card-text">Description: {{ item.description }}</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
   <section class="infoBox">

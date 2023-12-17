@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   getUsername() {
-    return sessionStorage.getItem(this.ACTIVE_USER_KEY)
+    return sessionStorage.getItem(this.ACTIVE_USER_KEY)!.toString()
   }
 
   logout(): void {
