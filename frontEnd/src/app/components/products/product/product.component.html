@@ -31,7 +31,10 @@
                       (click)="removeFromWishlist()">Remove from Wishlist
               </button>
               <ng-template #addToWishlistBtn>
-                <button class="btn btn-primary" (click)="addToWishlist()">Add to Wishlist</button>
+                <button *ngIf="isLoggedIn(); else redirectToLogin" class="btn btn-primary" (click)="addToWishlist()">Add to Wishlist</button>
+                <ng-template #redirectToLogin>
+                  <a href="/login" class="btn btn-primary">Login to Add to Wishlist</a>
+                </ng-template>
               </ng-template>
               <button class="btn btn-primary" (click)="addToCart(product)" style="margin: 10px">Add to Cart</button>
             </p>
