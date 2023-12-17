@@ -14,6 +14,9 @@ export class ProductComponent {
   product_list: any;
   reviews: any = [];
   reviewForm: any;
+  wishlistItems: any[] = []; // Assuming the structure matches the API response
+
+  activeProductId: any;
   constructor(private webService: WebService,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -23,8 +26,10 @@ export class ProductComponent {
 
     this.setUpReviewForm()
 
-    this.product_list = this.webService.getProductById(this.route.snapshot.params['id'])
-    this.reviews = this.webService.getReviews(this.route.snapshot.params['id'])
+    this.activeProductId = this.route.snapshot.params['id']
+
+    this.product_list = this.webService.getProductById(this.activeProductId)
+    this.reviews = this.webService.getReviews(this.activeProductId)
   }
 
   setUpReviewForm(){
@@ -50,6 +55,7 @@ export class ProductComponent {
       this.setUpReviewForm()
     });
   }
+
 
   isInvalidUsername() {
     if(this.isLoggedIn()){
@@ -88,4 +94,25 @@ export class ProductComponent {
     return this.authService.getUsername();
   }
 
+  addToWishlist() {
+    return this.webService.addToWishlist(this.activeProductId)
+  }
+
+  removeFromWishlist(){
+    return this.webService.removeFromWishlist(this.activeProductId)
+  }
+
+  isInWishlist(productId: string): boolean {
+
+      this.webService.getAllFromWishlist().subscribe(
+        (data: any) => {
+          this.wishlistItems = data.wishlist;
+        },
+        (error: any) => {
+          console.error('Error fetching wishlist:', error);
+        }
+      );
+
+    return this.wishlistItems.some(item => item._id === productId);
+  }
 }

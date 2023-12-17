@@ -32,11 +32,26 @@
                 <p class="d-none d-md-block mb-0 icon-text-spacing">Sign in</p>
               </a>
             </ng-container>
-<!--            <a href="/login" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <img src="/assets/icons/person-fill.svg" alt="profile"> <p class="d-none d-md-block mb-0 icon-text-spacing">{{getUsername()}}</p></a>-->
+            <!-- Wishlist link with conditional redirection -->
+            <a *ngIf="isLoggedIn()" href="/wishlist" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+              <img src="/assets/icons/bookmark-heart-fill.svg" alt="profile">
+              <p class="d-none d-md-block mb-0 icon-text-spacing">Wishlist</p>
+            </a>
+            <a *ngIf="!isLoggedIn()" href="/login" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+              <img src="/assets/icons/bookmark-heart-fill.svg" alt="profile">
+              <p class="d-none d-md-block mb-0 icon-text-spacing">Wishlist</p>
+            </a>
 
-            <!--            <a class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <img src="/assets/icons/person-fill.svg" alt="profile"> <p class="d-none d-md-block mb-0 icon-text-spacing">Sign in</p> </a>-->
-            <a class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <img src="/assets/icons/bookmark-heart-fill.svg" alt="wishlist"><p class="d-none d-md-block mb-0 icon-text-spacing">Wishlist</p> </a>
-            <a class="border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <img src="/assets/icons/basket3-fill.svg" alt="cart"><p class="d-none d-md-block mb-0 icon-text-spacing">My cart</p> </a>
+            <!-- Cart link with conditional redirection -->
+            <a *ngIf="isLoggedIn()" href="/" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+              <img src="/assets/icons/basket3-fill.svg" alt="profile">
+              <p class="d-none d-md-block mb-0 icon-text-spacing">Cart</p>
+            </a>
+            <a *ngIf="!isLoggedIn()" href="/login" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+              <img src="/assets/icons/basket3-fill.svg" alt="profile">
+              <p class="d-none d-md-block mb-0 icon-text-spacing">Cart</p>
+            </a>
+
           </div>
         </div>
         <!-- Center elements -->

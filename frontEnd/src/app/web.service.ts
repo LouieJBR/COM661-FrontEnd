@@ -2,32 +2,37 @@ import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/
 import { Injectable } from '@angular/core'
 import { CookieService } from 'ngx-cookie-service';
 import {catchError, filter, map, Observable, tap, throwError} from "rxjs";
-import {Router} from "@angular/router";
+import {Router, withInMemoryScrolling} from "@angular/router";
 import {AuthService} from "./services/AuthService";
 
 @Injectable()
 export class WebService {
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private authService: AuthService) {}
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private authService: AuthService) {
+  }
+
+  private readonly ACTIVE_USER_KEY = 'ActiveUser';
 
   private productID: any;
+
   getAllProductsPagination(page: number) {
     return this.http.get('http://localhost:5000/api/v1.0/products?pn=' + page);
-    }
+  }
 
   getAllProducts() {
     return this.http.get('http://localhost:5000/api/v1.0/products');
   }
-  getProductById(id:any) {
+
+  getProductById(id: any) {
     this.productID = id
     return this.http.get('http://localhost:5000/api/v1.0/products/' + id);
   }
 
-  getProductByType(productType:any) {
+  getProductByType(productType: any) {
     console.log(productType)
-    return this.http.get('http://localhost:5000/api/v1.0/products/type/'+ productType);
+    return this.http.get('http://localhost:5000/api/v1.0/products/type/' + productType);
   }
 
-  getReviews(id:any){
+  getReviews(id: any) {
     return this.http.get(
       'http://localhost:5000/api/v1.0/products/' +
       id + '/reviews')
@@ -87,13 +92,13 @@ export class WebService {
   }
 
 
-  logout(){
+  logout() {
     this.authService.logout()
     return this.http.get('http://localhost:5000/api/v1.0/logout');
   }
 
 
-  postReview(review: any){
+  postReview(review: any) {
     let postData = new FormData();
     postData.append("username", review.username);
     postData.append("comment", review.comment);
@@ -108,5 +113,56 @@ export class WebService {
     return this.http.post('http://localhost:5000/api/v1.0/products/' +
       this.productID + '/reviews', postData);
   }
+
+  getUserId() {
+    let userName = sessionStorage.getItem(this.ACTIVE_USER_KEY)
+    return this.http.get('http://localhost:5000/api/v1.0/users/' + userName)
   }
 
+  addToWishlist(productId: string) {
+    const username = sessionStorage.getItem(this.ACTIVE_USER_KEY); // Retrieve username from session storage
+
+    if (username) {
+      this.http.post(`http://localhost:5000/api/v1.0/wishlist/${username}/add/${productId}`, {}).subscribe(
+        (response: any) => {
+          // Handle successful addition to wishlist response here
+          console.log('Product added to wishlist:', response);
+          window.location.href='/wishlist'
+        },
+        (error: any) => {
+          // Handle error response here
+          console.error('Failed to add product to wishlist:', error);
+        }
+      );
+    } else {
+      // Handle scenario where username is not available
+      console.error('Username not found');
+    }
+  }
+
+  removeFromWishlist(productId: string) {
+    const username = sessionStorage.getItem(this.ACTIVE_USER_KEY); // Retrieve username from session storage
+
+    if (username) {
+      this.http.delete(`http://localhost:5000/api/v1.0/wishlist/${username}/remove/${productId}`, {}).subscribe(
+        (response: any) => {
+          // Handle successful addition to wishlist response here
+          console.log('Product removed from wishlist:', response);
+          window.location.href='/wishlist'
+        },
+        (error: any) => {
+          // Handle error response here
+          console.error('Failed to remove product from wishlist:', error);
+        }
+      );
+    } else {
+      // Handle scenario where username is not available
+      console.error('Username not found');
+    }
+  }
+
+  getAllFromWishlist(){
+    let username = sessionStorage.getItem(this.ACTIVE_USER_KEY)
+    return this.http.get('http://localhost:5000/api/v1.0/wishlist/' + username)
+  }
+}

@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import {WebService} from "../../web.service";
-import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-wishlist',
-  templateUrl: './wishlist.component.html',
-  styleUrl: './wishlist.component.css'
+  selector: 'app-testwishlist',
+  templateUrl: './testwishlist.component.html',
+  styleUrl: './testwishlist.component.css'
 })
-export class WishlistComponent {
+export class TESTWISHLISTComponent {
   wishlistItems: any[] = []; // Assuming the structure matches the API response
 
-  constructor(private webService: WebService, private router: Router) { }
+  constructor(private webService: WebService) { }
 
   ngOnInit(): void {
     this.getWishlist();
@@ -26,9 +25,4 @@ export class WishlistComponent {
       }
     );
   }
-
-  redirectToProduct(productId: string) {
-    this.router.navigate(['/products', productId]);
-  }
-
 }
