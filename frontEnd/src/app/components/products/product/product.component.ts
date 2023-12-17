@@ -24,12 +24,13 @@ export class ProductComponent {
 
   ngOnInit(){
 
-    this.setUpReviewForm()
+    this.setUpReviewForm();
+    this.activeProductId = this.route.snapshot.params['id'];
+    this.product_list = this.webService.getProductById(this.activeProductId);
+    this.reviews = this.webService.getReviews(this.activeProductId);
 
-    this.activeProductId = this.route.snapshot.params['id']
-
-    this.product_list = this.webService.getProductById(this.activeProductId)
-    this.reviews = this.webService.getReviews(this.activeProductId)
+    // Fetch wishlist items once during initialization
+    this.fetchWishlistItems();
   }
 
   setUpReviewForm(){
@@ -103,16 +104,18 @@ export class ProductComponent {
   }
 
   isInWishlist(productId: string): boolean {
-
-      this.webService.getAllFromWishlist().subscribe(
-        (data: any) => {
-          this.wishlistItems = data.wishlist;
-        },
-        (error: any) => {
-          console.error('Error fetching wishlist:', error);
-        }
-      );
-
     return this.wishlistItems.some(item => item._id === productId);
   }
+
+  fetchWishlistItems() {
+    this.webService.getAllFromWishlist().subscribe(
+      (data: any) => {
+        this.wishlistItems = data.wishlist;
+      },
+      (error: any) => {
+        console.error('Error fetching wishlist:', error);
+      }
+    );
+  }
+
 }
